@@ -131,3 +131,7 @@ tbody tr:hover {
     font-family: sans-serif;
     font-size: 35px;
 }
+
+#small::after {
+    content: url('../resources/day-mother.jpg');
+}
