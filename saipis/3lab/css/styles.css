@@ -1,0 +1,133 @@
+.text {
+    background: linear-gradient(to bottom, #FFFFFF, #C0C0C0);
+    min-height: 100%;
+}
+
+html, body{
+    padding: 0;
+    margin: 0;
+}
+html{
+    height: 100%;
+}
+
+.text {
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px solid #FFE6D6;
+    border-radius: 0 0 20px 20px;
+}
+
+#p-text {
+    position: absolute;
+    top: 2%;
+    left: 9%;
+    font-size: 32px;
+    animation: blinker 1s linear infinite;
+}
+
+#second-div {
+    position: relative;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    background-color: oldlace;
+}
+td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid #000; /* Параметры рамки */
+}
+th {
+    background: #afd792; /* Цвет фона */
+    color: #333;  /* Цвет текста */
+}
+tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+}
+
+#fixed-block {
+    position: fixed;
+    margin-left: auto;
+}
+
+.wrapper {
+     width: 570px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+#header {
+    border: 10px solid #ffdd7e94;
+    background: #ffdd7e94;
+    float: left;
+}
+
+#general-background {
+    background: url("../resources/back.jpg") no-repeat;
+    background-size: cover;
+}
+
+#center-circles {
+    text-align: center;
+}
+
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#div {
+    float: left;
+    width: 145px;
+    height: 50px;
+    background: #ffeba3;
+    filter: drop-shadow( 0px 3px 0 black) drop-shadow( 0px -3px 0 black) drop-shadow( 3px 0px 0 black) drop-shadow(-3px 0px 0 black);
+    -webkit-filter: drop-shadow( 0px 3px 0 #ffeba3) drop-shadow( 0px -3px 0 #ffeba3) drop-shadow( 3px 0px 0 #ffeba3) drop-shadow(-3px 0px 0 #ffeba3);
+}
+
+#div::after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    left: 145px;
+    top: 0;
+    border-left: 70px solid #ffeba3;
+    border-right: 70px solid transparent;
+    border-bottom: 50px solid transparent;
+}
+
+#title-font {
+    margin-left: 160px;
+    font-style: oblique;
+    font-family: sans-serif;
+    font-size: 35px;
+}

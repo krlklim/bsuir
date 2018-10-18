@@ -1,0 +1,163 @@
+body {
+    background-image: url("tablets-pills.jpg");
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    background-color: #000000B0;
+    margin: 20px;
+}
+
+tr {
+    background-color: #F8BBD0B0;
+}
+
+td {
+    padding: 20px;
+    vertical-align: top;
+}
+
+table, td, tr {
+    border-top-width: 10px;
+    border-right-width: 1px;
+    border-bottom-width: 10px;
+    border-left-width: 1px;
+}
+
+.td-left {
+    text-align: left;
+}
+
+.text-image {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.td-right {
+    text-align: right;
+}
+
+.td-center {
+    text-align: center;
+}
+
+.td-justify {
+    text-align: justify;
+}
+
+.heading {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 40px;
+}
+
+.td-heading-1 {
+    background-color: #FFC107B0;
+}
+
+.td-heading-2 {
+    background-color: #C2185BB0;
+    color: #FFFFFF;
+}
+
+.td-heading-3 {
+    background-color: #E91E63B0;
+    color: #FFFFFF;
+}
+
+ol.list-brackets {
+    counter-reset: list;
+    text-indent: -35px;
+}
+
+ol.list-brackets > li {
+    list-style: none;
+}
+
+ol.list-brackets > li:before {
+    content: counter(list) ") ";
+    counter-increment: list;
+}
+
+ul.list-dashed {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul.list-dashed > li:before {
+    content: "- ";
+}
+
+.text1 {
+    color: #000000;
+    font-style: italic;
+}
+
+.text2 {
+    font-weight: bold;
+}
+
+.text3 {
+    color: #000000;
+}
+
+.text4 {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.text5 {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.image-wrapper {
+    padding: 10px;
+}
+
+.list-colored {
+    color: #005697;
+}
+
+.image-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 450px;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.overlay {
+    top: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+.container {
+    position: relative;
+    width: 50%;
+}

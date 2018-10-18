@@ -1,0 +1,155 @@
+.main-table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.main-table td {
+    border: 1px solid black;
+}
+
+.meds img {
+    position: relative;
+}
+
+#maprotilin {
+    width: 250px;
+}
+
+#sonex {
+    top: 50px;
+    left: -100px;
+}
+
+#tramadol {
+    position: relative;
+    top: -150px;
+    left: 250px;
+    width: 500px;
+}
+
+#tramadol span {
+    position: absolute;
+    top: 150px;
+    left: 200px;
+    word-break: break-all;
+    z-index: 1;
+}
+
+#tramadol #tramadol-title {
+    top: 120px;
+    left: 200px;
+    font-size: x-large;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#rectangle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: aquamarine;
+    right: 0;
+    opacity: 1;
+    z-index: 2;
+    animation-name: rectangle;
+    animation-duration: 4s;
+    animation-iteration-count: 3;
+}
+
+@keyframes rectangle {
+    from { right: 0;
+           background-color: aquamarine;
+           opacity: 1;
+        transform: rotate(0deg);}
+    to { right: 100%;
+         background-color: burlywood;
+         opacity: 0.2;
+        transform: rotate(360deg);}
+}
+
+#second-td {
+    position: relative;
+    background: url("../resource/drugs.jpg") no-repeat;
+    background-size: 350px auto;
+    background-origin: content-box;
+}
+
+#first-td-width {
+    width: 60%;
+}
+
+#background::after {
+    content: "";
+    background: url("../resource/cosmos.jpg") no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.columns {
+    display: flex;
+    color: white;
+}
+
+.columns p {
+    margin: 0;
+    -webkit-text-fill-color: transparent;
+}
+
+#paragraph-one {
+    font-size: small;
+    font-weight: bold;
+    background: -webkit-linear-gradient(antiquewhite, #333);
+    -webkit-background-clip: text;
+}
+
+#paragraph-two {
+    font-size: larger;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(beige, #333);
+    -webkit-background-clip: text;
+}
+
+#paragraph-three {
+    font-size: xx-large;
+    font-weight: normal;
+    background: -webkit-linear-gradient(blanchedalmond, #333);
+    -webkit-background-clip: text;
+}
+
+@keyframes tramadol {
+    from { position: relative;
+        top: 150px;
+        left: 200px; }
+    to { top: 50px;
+        left: 100px; }
+}
+
+@keyframes sonex {
+    from { top: 50px;
+        left: 100px; }
+    to { position: relative;
+        top: 150px;
+        left: 200px; }
+}
+
+#tramadol-to-sonex {
+    opacity: 0.5;
+    animation-name: tramadol;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+#sonex-to-tramadol {
+    opacity: 0.8;
+    animation-name: sonex;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    z-index: 1;
+}

@@ -1,0 +1,74 @@
+.text {
+    min-height: 100%;
+    border-radius: 0px 20px 20px 20px;
+}
+
+body {
+    background: radial-gradient(at top left, #FFFFFF, #C0C0C0);
+}
+
+.text a {
+    border-right: 1px solid black;
+    padding-right: 5px;
+}
+
+#image {
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+figure.img {
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+figure.img img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure.img figcaption {
+    padding: 0;
+    font: italic 90% Georgia,serif;
+}
+
+.shadow {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding: 10px;
+}
+
+#border-footer {
+    border: 10px solid #ffe6d654;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+#header {
+    width: auto;
+    display: inline-block;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
