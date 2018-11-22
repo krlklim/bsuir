@@ -1,0 +1,96 @@
+body {
+
+    font-family: Trebuchet MS, Arial, Times New Roman;
+    font-size: 12px;
+    background-size: 100%;
+}
+
+#container {
+    background: white;
+    margin: 30px auto;
+    background-size: 100%;
+
+}
+
+#header {
+    background: url("../resources/header.jpg") no-repeat;
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+#navigation {
+    background: url("../resources/give.jpg");
+    float: left;
+    width: 524px;
+    height: 1000px;
+    background-size: contain;
+    opacity: 0.8;
+}
+
+#menu {
+    background: white;
+    float: right;
+    width: 400px;
+    height: 800px;
+}
+
+#content {
+    background: url("../resources/content.png") no-repeat center;
+    float: right;
+    width: 740px;
+    height: 1000px;
+    text-align: center;
+    background-size: cover;
+    color: white;
+}
+
+#clear {
+    clear: both;
+}
+
+#footer {
+    background: url("../resources/footer.jpg") no-repeat;
+    padding: 25px;
+    color: #fff;
+    height: 100px;
+    width: 100%;
+     text-align: center;
+}
+
+.sb {
+    font: 120% sans-serif;
+    color: Black;
+}
+
+
+.header {
+    background-image: url('img/nowt.jpg');
+    height: 150px;
+    width: 1500px;
+}
+
+.comp {float: left;
+    height: 1000px;
+    width: 500px;
+}
+
+.now {
+    float: right;
+    height: 1000px;
+    width: 400px;
+}
+
+.exsansserif {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+}
+
+.scr {
+    height: 100px;
+    width: 1500px;
+}
+
+.orderedName {
+    text-align: left;
+}
