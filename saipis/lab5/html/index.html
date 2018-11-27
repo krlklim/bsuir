@@ -1,0 +1,101 @@
+<html lang="кг">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <title>Коте4ки</title>
+
+</head>
+
+<body class="bg-light cats">
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Коте4ки</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 order-md-1">
+            <h4 class="mb-3">Назови котейку</h4>
+            <form>
+                <div id="form-dynamic-rows">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label>Котейка</label>
+                            <input type="text" class="form-control cat-input">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label>Котейка</label>
+                            <input type="text" class="form-control cat-input">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label>Котейка</label>
+                            <input type="text" class="form-control cat-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="font-size">Шрифт</label>
+                        <select class="d-block w-100" id="font-size">
+                            <option value="14">14px</option>
+                            <option value="24">24px</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="font-color">Цвет</label>
+                        <select class="d-block w-100" id="font-color">
+                            <option value="#dc3545">Красный</option>
+                            <option value="#17a2b8">Синий</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <button id="clear-button" class="btn btn-danger btn-block" type="button">Очистить</button>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <button id="info-button" class="btn btn-info btn-block" type="button">Вывести инфо</button>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <button id="add-button" class="btn btn-success btn-block" type="button">Добавить котейку</button>
+                    </div>
+                </div>
+
+                <div class="modal" id="cats-modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Котеечки</h5>
+                                <span id="close-modal">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <div id="cats-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="cat-input-row">
+                    <div class="col-md-12 mb-3">
+                        <label>Котейка</label>
+                        <input type="text" class="form-control cat-input">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 order-md-1">
+            <div id="cat-image">
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
