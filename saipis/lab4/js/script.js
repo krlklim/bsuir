@@ -3,6 +3,7 @@ document.getElementById('MainForm').onsubmit = function (event) {
 
     var tr = document.createElement('tr');
     var names = getData('name', 'input');
+    var table = document.getElementById('mainTable');
 
     tr.appendChild(generateData(names));
     tr.appendChild(generateData(getData('date', 'input')));
@@ -13,7 +14,7 @@ document.getElementById('MainForm').onsubmit = function (event) {
     tr.appendChild(generateData(getData('tel', 'input')));
     tr.appendChild(generateData(getData('email', 'input')));
 
-    document.getElementById('mainTable').appendChild(tr);
+    table.appendChild(tr);
 
     var namesOuterList = document.getElementById('namesOuterList');
     var namesList = document.getElementById('namesList');
@@ -31,7 +32,12 @@ document.getElementById('MainForm').onsubmit = function (event) {
     li.innerText = names[0].value;
     namesList.appendChild(li);
 
-    
+    if(document.getElementsByName("ifSend")[0].checked == true) {
+
+        openWindow(table.outerHTML) ;
+    }
+
+
     function getData(inputName, elType) {
         return document.querySelectorAll(elType + '[name=\"' + inputName + '\"]');
     }
@@ -56,4 +62,20 @@ document.getElementById('MainForm').onsubmit = function (event) {
         }
         return td;
     }
+
+    function openWindow(data) {
+
+            console.log('if');
+            var newWindow = window.open('about::blank', 'Результаты', 'width = 1024px, height = 480px, top = 100vh, left = 150vw, scrollbars = yes');
+            newWindow.document.write('<script src="../js/script.js"></script><div><h2> Результаты: </h2></div>');
+            newWindow.document.write(data);
+            newWindow.document.write('<br><br><input class="button" type="button" value="Закрыть" onClick = "closeWindow()"></div></div></body></html>');
+    }
+}
+
+
+
+function closeWindow()
+{
+    var thisWindow = window.close();
 }
