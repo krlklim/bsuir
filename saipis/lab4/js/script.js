@@ -65,11 +65,11 @@ document.getElementById('MainForm').onsubmit = function (event) {
 
     function openWindow(data) {
 
-            console.log('if');
-            var newWindow = window.open('about::blank', 'Результаты', 'width = 1024px, height = 480px, top = 100vh, left = 150vw, scrollbars = yes');
-            newWindow.document.write('<script src="../js/script.js"></script><div><h2> Результаты: </h2></div>');
-            newWindow.document.write(data);
-            newWindow.document.write('<br><br><input class="button" type="button" value="Закрыть" onClick = "closeWindow()"></div></div></body></html>');
+        console.log('if');
+        var newWindow = window.open('about::blank', 'Результаты', 'width = 1024px, height = 480px, top = 100vh, left = 150vw, scrollbars = yes');
+        newWindow.document.write('<script src="../js/script.js"></script><div><h2> Результаты: </h2></div>');
+        newWindow.document.write(data);
+        newWindow.document.write('<br><br><input class="button" type="button" value="Закрыть" onClick = "closeWindow()"></div></div></body></html>');
     }
 }
 

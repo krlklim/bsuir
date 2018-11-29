@@ -15,6 +15,9 @@ function setupButtons() {
     document.getElementById('add-button').onclick = function(){
         handleAddButtonClicked();
     }
+    document.getElementById('delete-button').onclick = function(){
+        deleteCats();
+    }
 }
 
 function setupModal() {
@@ -100,4 +103,12 @@ function compactArray(array) {
     return array.filter(function (element) {
         return (element != null && element !== '');
     });
+}
+
+function deleteCats() {
+    let inputs = document.getElementsByClassName('form-control');
+    let allCats = arrayFromInputs(inputs);
+    for (var i = 0; i < allCats.length; i += 2) {
+        document.getElementById('form-dynamic-rows').removeChild(allCats[i]);
+    }
 }
