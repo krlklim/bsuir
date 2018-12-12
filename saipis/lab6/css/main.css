@@ -1,0 +1,28 @@
+#fruit-image {
+    background: url("../resources/apricot.png") no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
+
+#fruit-image-coco {
+    background: url("../resources/coconut.png") no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 250px;
+}
+
+#fruit-image-banana {
+    background: url("../resources/banana.png") no-repeat;
+    background-size: cover;
+    height: 292px;
+    width: 430px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.good {
+    color: #28a745;
+    font-size: 20px;
+}
