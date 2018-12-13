@@ -1,0 +1,4 @@
+body {
+    background: url('../resources/globe.png') no-repeat fixed center;
+    background-size: contain;
+}

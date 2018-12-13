@@ -1,0 +1,86 @@
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <script src="../js/script.js"></script>
+    <title>Страны</title>
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <div class="py-5 text-center text-light">
+            <h2>Страны</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <label for="countrySelect">Выберите страну</label>
+                        <select class="form-control" id="countrySelect">
+                            <option>Belarus</option>
+                            <option>UK</option>
+                            <option>USA</option>
+                            <option>Russia</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-info" id="loadCountryButton">Загрузить</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Информация
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" id="par"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../resources/library.jpg" alt="Card image cap">
+                    <div class="card-header">
+                        Достопримечательности
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" id="landmarks"></p>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">
+                        Столица
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" id="capital"></p>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">
+                        Население
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" id="population"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Ajax log
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" id="ajaxLog"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
