@@ -53,6 +53,7 @@ function handleAddButtonClicked() {
     let newRow = catRow.cloneNode(true);
     document.getElementById('form-dynamic-rows').append(newRow);
     newRow.setAttribute('id', '');
+    newRow.classList.add('cat-row')
 }
 
 function collectCats() {
@@ -106,9 +107,10 @@ function compactArray(array) {
 }
 
 function deleteCats() {
-    let inputs = document.getElementsByClassName('form-control');
+    let inputs = document.getElementsByClassName('cat-row');
     let allCats = arrayFromInputs(inputs);
-    for (var i = 0; i < allCats.length; i += 2) {
-        document.getElementById('form-dynamic-rows').removeChild(allCats[i]);
+
+    for (let i = 1; i < allCats.length; i += 2) {
+        allCats[i].parentNode.removeChild(allCats[i]);
     }
 }
