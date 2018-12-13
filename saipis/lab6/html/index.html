@@ -18,12 +18,12 @@
 
 
     <div class="row">
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-4 order-md-1">
             <div id="fruit-image">
             </div>
         </div>
 
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-4 order-md-1">
             <div id="fruit-image-coco"></div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 
 
     <div class="row">
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-4 order-md-1">
             <ol id="fruit-groups" type="1">
                 <li data-letter="a">A группа</li>
                 <li data-letter="b">B группа</li>
@@ -40,7 +40,7 @@
             </ol>
     </div>
 
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-4  order-md-1">
             <ol id="fruit-sentences" type="1">
                 <li>Apricot is a good orange fruit. </li>
                 <li>Avocado is a good green fruit. </li>
@@ -54,14 +54,24 @@
                 <li>Apple is a red fruit. </li>
             </ol>
         </div>
+        <div class="col-md-4  order-md-1">
+            <form>
+                <div class="form-group">
+                    <label for="new-fruit-input">Добавить фруктик</label>
+                    <input type="text" class="form-control" id="new-fruit-input" placeholder="Введите название">
+                </div>
+                <button type="button" id="add-fruit-button" class="btn btn-primary">Добавить</button>
+            </form>
+
+        </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-6">
             <button type="button" class="btn btn-outline-warning" id="insert-button">Вставить в первый список</button>
         </div>
 
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-6">
             <button type="button" class="btn btn-outline-success" id="good-button">Поменять стиль у good</button>
         </div>
     </div>
