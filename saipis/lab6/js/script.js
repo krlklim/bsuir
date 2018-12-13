@@ -11,6 +11,9 @@ function setupButtons() {
         handleGoodButtonClicked();
     })
 
+    $('#add-fruit-button').click(function() {
+      handleAddFruitButtonClicked();
+    })
 }
 
 function handleInsertButtonClicked() {
@@ -51,4 +54,21 @@ function getSentencesFromList(selector, pattern) {
         return accumulator;
     };
     return $(selector).find('li').toArray().reduce(sentencesReducer, []);
+}
+
+function handleAddFruitButtonClicked() {
+    let fruit = $('#new-fruit-input').val();
+    let listsSelector = '.new-fruit-list'
+
+    if ($(listsSelector).length === 0) {
+      let list = $("<ul></ul>");
+      list.addClass('new-fruit-list');
+      $('#fruit-groups li:first ul li.good').toArray().forEach(listElement => {
+        $(listElement).append(list);
+      })
+    }
+
+    $(listsSelector).toArray().forEach(list => {
+        $(list).append(`<li>${fruit}</li>`)
+    })
 }
