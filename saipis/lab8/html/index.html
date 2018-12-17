@@ -1,0 +1,95 @@
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <script src="../js/mustache.min.js"></script>
+    <title>Страны</title>
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Школа</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="allClasses">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <button type="button" id="showClassesButton" class="btn btn-primary">Загрузить классы</button>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="studentsNumberInput">Количество учеников</label>
+                                    <input type="number" class="form-control" id="studentsNumberInput" placeholder="Введите количество учеников">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneInput">Телефон классного руководителя</label>
+                                    <input type="text" class="form-control" id="phoneInput" placeholder="Введите телефон классного руководителя">
+                                </div>
+                                <div class="form-group">
+                                    <label for="teacherInput">ФИО классного руководителя</label>
+                                    <input type="text" class="form-control" id="teacherInput" placeholder="Введите ФИО классного руководителя">
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" id="addClassButton" class="btn btn-success">Добавить класс</button>
+                                    <button type="button" id="clearFormButton" class="btn btn-warning">Очистить форму</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <form class="form-inline">
+                        <div class="form-group mr-md-3">
+                            <div id="deleteClassInput"></div>
+                        </div>
+                        <button type="button" id="deleteClassButton" class="btn btn-danger md-3">Удалить класс</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="allClassesTemplate" type="text/template">
+        <table class="table table-bordered table-striped" id="classesTable">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Количество учеников</th>
+                    <th>Телефон классного руководителя</th>
+                    <th>ФИО классного руководителя</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#classes}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{studentsNumber}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{teacher}}</td>
+                </tr>
+                {{/classes}}
+            </tbody>
+        </table>
+    </script>
+    <script id="deleteClassInputTemplate" type="text/template">
+        <select title="Deleted class id" class="form-control" id="deletedClassId">
+            <option selected>Выберите id</option>
+            {{#classIds}}
+            <option value="{{id}}">{{id}}</option>
+            {{/classIds}}
+        </select>
+    </script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
