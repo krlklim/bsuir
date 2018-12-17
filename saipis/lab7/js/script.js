@@ -18,10 +18,28 @@ setupButtons = () => {
         $.ajax({url: `../resources/${selectedCountry()}.txt`, success: populateCountryInfo});
         $.getJSON(`../resources/${selectedCountry()}.json`, populateLandmarksInfo)
     })
+
+    $('#loadCountryXMLButton').click((event) => {
+      event.preventDefault();
+      $(event.target).blur();
+
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', `../resources/${selectedCountry()}.txt`);
+      xhr.onload = function() {
+        if (xhr.status === 0) {
+          populateCountryInfoXHR(xhr.responseText)
+        }
+        else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+        }
+      };
+      xhr.send();
+    })
 }
 
 selectedCountry = () => $('#countrySelect').val();
 populateCountryInfo = (data) => $('#par').text(data);
+populateCountryInfoXHR = (data) => $('#parXHR').text(data);
 writeAjaxLog = (message) => $('#ajaxLog').append(`<span>${message}</span><br/>`);
 
 populateLandmarksInfo = (info) => {
@@ -29,3 +47,4 @@ populateLandmarksInfo = (info) => {
     $('#population').text(info.population);
     $('#capital').text(info.capital);
 }
+
