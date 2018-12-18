@@ -105,12 +105,25 @@ class DatabaseConnector {
 }
 
 class School {
+    static get table() {
+        return 'classes';
+    }
+
+    static get columns() {
+        return {
+            id: 'id',
+            teacher: 'teacher',
+            studentsNumber: 'studentsNumber',
+            phone: 'phone'
+        }
+    }
+
     static create(studentsNumber, phone, teacher) {
         DatabaseConnector.insertQuery(
             [
-                DatabaseConnector.schema.columns.studentsNumber.name,
-                DatabaseConnector.schema.columns.phone.name,
-                DatabaseConnector.schema.columns.teacher.name,
+                School.columns.studentsNumber,
+                School.columns.phone,
+                School.columns.teacher,
             ],
             [
                studentsNumber,
@@ -131,6 +144,21 @@ class School {
     static delete(id, callback = () => {}) {
         DatabaseConnector.deleteByIdQuery(id, callback);
     }
+
+    static maxClasses(callback = () => {}) {
+        DatabaseConnector.executeSql(`
+            SELECT 
+                ${School.columns.teacher}
+            FROM ${School.table}
+            INNER JOIN (
+                SELECT MAX(${School.columns.studentsNumber}) AS number
+                FROM ${School.table}
+            ) maxStudents
+            ON ${School.table}.${School.columns.studentsNumber} = maxStudents.number`,
+            [],
+            ((transaction, result) => { callback(result.rows) })
+        )
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -140,10 +168,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 setupButtons = () => {
-    document.getElementById("addClassButton").onclick = () => handleAddClassButtonClicked();
-    document.getElementById("showClassesButton").onclick = () => handleShowClassesButtonClicked();
-    document.getElementById("clearFormButton").onclick = () => handleClearFormButtonClicked();
-    document.getElementById("deleteClassButton").onclick = () => handleDeleteClassButtonClicked();
+    document.getElementById("addClassButton").onclick = handleAddClassButtonClicked;
+    document.getElementById("showClassesButton").onclick = handleShowClassesButtonClicked;
+    document.getElementById("clearFormButton").onclick = handleClearFormButtonClicked;
+    document.getElementById("deleteClassButton").onclick = handleDeleteClassButtonClicked;
+    document.getElementById("showMaxTeachersButton").onclick = handleShowMaxTeachersButton;
 };
 
 handleAddClassButtonClicked = () =>
@@ -164,6 +193,7 @@ handleDeleteClassButtonClicked = () => {
 };
 
 handleShowClassesButtonClicked = () => loadTable();
+handleShowMaxTeachersButton = () => School.maxClasses(classes => populateMaxClasses(classes));
 loadTable = () => School.all(classes => populateTable(classes));
 
 populateTable = classes => {
@@ -176,4 +206,10 @@ populateSelect = ids => {
     let template = document.getElementById("deleteClassInputTemplate").innerHTML;
     Mustache.parse(template);
     document.getElementById("deleteClassInput").innerHTML = Mustache.render(template, { classIds: Array.from(ids) });
+};
+
+populateMaxClasses = classes => {
+    let template = document.getElementById("maxClassesTemplate").innerHTML;
+    Mustache.parse(template);
+    document.getElementById("maxTeachers").innerHTML = Mustache.render(template, { classes: Array.from(classes) });
 };

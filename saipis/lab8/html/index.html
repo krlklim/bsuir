@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <script src="../js/mustache.min.js"></script>
-    <title>Страны</title>
+    <title>Школа</title>
 </head>
 
 <body class="bg-light">
@@ -56,6 +56,17 @@
                         <button type="button" id="deleteClassButton" class="btn btn-danger md-3">Удалить класс</button>
                     </form>
                 </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md=12">
+                        <button type="button" id="showMaxTeachersButton" class="btn btn-info">Показать ФИО руководителей</button>
+                        <br/>
+                        <br/>
+                        <div id="maxTeachers">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -89,6 +100,13 @@
             <option value="{{id}}">{{id}}</option>
             {{/classIds}}
         </select>
+    </script>
+    <script id="maxClassesTemplate" type="text/template">
+        <ul class="list-group">
+            {{#classes}}
+            <li class="list-group-item">{{teacher}}</li>
+            {{/classes}}
+        </ul>
     </script>
     <script src="../js/script.js"></script>
 </body>
