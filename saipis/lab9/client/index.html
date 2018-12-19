@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+		<title>Массивы</title>
+	</head>
+	<body class="bg-light">
+		<div class="container">
+			<div class="py-5 text-center">
+				<h2>Массивы</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<form method="post" id="form">
+								<div class="form-group">
+									<label for="arraysInput">Введите массив строк (каждая строка - элемент массива)</label>
+									<textarea class="form-control" rows="8" name="arr" id="arraysInput"></textarea>
+								</div>
+								<button class="btn btn-primary" type="button" id="submitArrayButton">Отправить</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="sourceArrays">Результат</label>
+								<textarea class="form-control" rows="8" name="arr" id="sourceArrays" disabled></textarea>
+							</div>
+							<div class="btn-group" role="group">
+								<button type="button" id="showSourceButton" class="btn btn-success">Исходный массив</button>
+								<button type="button" id="showProcessedButton" class="btn btn-warning">Исправленный массив</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
