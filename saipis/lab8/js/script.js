@@ -1,16 +1,80 @@
 class DatabaseConnector {
     static get config() {
         return {
-            databaseName: "database_lab8",
             version: "1.0",
             description: "database for lab 8",
             size: 2 * 1024 * 1024
         }
     }
 
+    constructor(databaseName) {
+        this.connection = openDatabase(
+            databaseName,
+            DatabaseConnector.config.version,
+            DatabaseConnector.config.description,
+            DatabaseConnector.config.size
+        )
+    }
+
+
+    executeSql(query, values = [], successCallback = () => {}, errorCallback = (t, e) => { console.log(e) }) {
+        this.connection.transaction((transaction) =>
+            transaction.executeSql(
+                query,
+                values,
+                successCallback,
+                errorCallback
+            )
+        );
+    }
+
+    createTable(table, columns) {
+        this.executeSql(`
+            CREATE TABLE IF NOT EXISTS ${table} 
+            (
+                ${columns.map((column) => (
+                    `${column.name} ${column.type} ${column.attributes}`
+                )).join(", ")}
+            );
+        `)
+    }
+
+    insertQuery(table, columns, values) {
+        this.executeSql(`
+            INSERT INTO ${table} 
+            (${columns.join(',')}) VALUES (${Array(columns.length).fill('?').join(', ')})
+        `, values);
+    }
+
+    selectAllQuery(table, callback) {
+        this.executeSql(
+            `SELECT * FROM ${table}`,
+            [],
+            ((transaction, result) => { callback(result) })
+        )
+    }
+
+    selectIdsQuery(table, callback) {
+        this.executeSql(
+            `SELECT id FROM ${table}`,
+            [],
+            ((transaction, result) => { callback(result) })
+        )
+    }
+
+    deleteByIdQuery(table, id, callback) {
+        this.executeSql(
+            `DELETE FROM ${table} WHERE id = ?`,
+            [id],
+            ((transaction, result) => { callback(result) })
+        )
+    }
+}
+
+class ClassesManager {
     static get schema() {
         return {
-            name: "classes",
+            table: "classes",
             columns: {
                 id: {
                     name: "id",
@@ -36,180 +100,141 @@ class DatabaseConnector {
         }
     }
 
-
-    static get columns() {
-        return Object.keys(DatabaseConnector.schema.columns).map((key) => DatabaseConnector.schema.columns[key])
+    constructor() {
+        this.connector = new DatabaseConnector('schools');
     }
 
-    static connect() {
-        return openDatabase(
-            DatabaseConnector.config.databaseName,
-            DatabaseConnector.config.version,
-            DatabaseConnector.config.description,
-            DatabaseConnector.config.size
-        )
-    }
-
-    static executeSql(query, values = [], successCallback = () => {}, errorCallback = (t, e) => { console.log(e) }) {
-        DatabaseConnector.connect().transaction((transaction) =>
-            transaction.executeSql(
-                query,
-                values,
-                successCallback,
-                errorCallback
+    createTable() {
+        this.connector.createTable(
+            ClassesManager.schema.table, Object.keys(ClassesManager.schema.columns).map(key =>
+                ClassesManager.schema.columns[key]
             )
         );
     }
 
-    static createTable() {
-        DatabaseConnector.executeSql(`
-            CREATE TABLE IF NOT EXISTS ${DatabaseConnector.schema.name} 
-            (
-                ${DatabaseConnector.columns.map((column) => (
-                    `${column.name} ${column.type} ${column.attributes}`
-                )).join(", ")}
-            );
-        `)
-    }
-
-    static insertQuery(columns, values) {
-        DatabaseConnector.executeSql(`
-            INSERT INTO ${DatabaseConnector.schema.name} 
-            (${columns.join(',')}) VALUES (${Array(columns.length).fill('?').join(', ')})
-        `, values);
-    }
-
-    static selectAllQuery(callback) {
-        DatabaseConnector.executeSql(
-            `SELECT * FROM ${DatabaseConnector.schema.name}`,
-            [],
-            ((transaction, result) => { callback(result) })
-        )
-    }
-
-    static selectIdsQuery(callback) {
-        DatabaseConnector.executeSql(
-            `SELECT id FROM ${DatabaseConnector.schema.name}`,
-            [],
-            ((transaction, result) => { callback(result) })
-        )
-    }
-
-    static deleteByIdQuery(id, callback) {
-        DatabaseConnector.executeSql(
-            `DELETE FROM ${DatabaseConnector.schema.name} WHERE id = ?`,
-            [id],
-            ((transaction, result) => { callback(result) })
-        )
-    }
-}
-
-class School {
-    static get table() {
-        return 'classes';
-    }
-
-    static get columns() {
-        return {
-            id: 'id',
-            teacher: 'teacher',
-            studentsNumber: 'studentsNumber',
-            phone: 'phone'
-        }
-    }
-
-    static create(studentsNumber, phone, teacher) {
-        DatabaseConnector.insertQuery(
+    create(studentsNumber, phone, teacher) {
+        this.connector.insertQuery(
+            ClassesManager.schema.table,
             [
-                School.columns.studentsNumber,
-                School.columns.phone,
-                School.columns.teacher,
+                ClassesManager.schema.columns.studentsNumber.name,
+                ClassesManager.schema.columns.phone.name,
+                ClassesManager.schema.columns.teacher.name,
             ],
             [
-               studentsNumber,
-               phone,
-               teacher
+                studentsNumber,
+                phone,
+                teacher
             ]
         );
     }
 
-    static selectIds(callback) {
-        DatabaseConnector.selectIdsQuery((results) => callback(results.rows));
+    selectIds(callback) {
+        this.connector.selectIdsQuery(ClassesManager.schema.table, (results) => callback(results.rows));
     }
 
-    static all(callback) {
-        DatabaseConnector.selectAllQuery((results) => callback(results.rows));
+    all(callback) {
+        this.connector.selectAllQuery(ClassesManager.schema.table, (results) => callback(results.rows));
     }
 
-    static delete(id, callback = () => {}) {
-        DatabaseConnector.deleteByIdQuery(id, callback);
+    delete(id, callback = () => {}) {
+        this.connector.deleteByIdQuery(ClassesManager.schema.table, id, callback);
     }
 
-    static maxClasses(callback = () => {}) {
-        DatabaseConnector.executeSql(`
+    maxClasses(callback = () => {}) {
+        this.connector.executeSql(`
             SELECT 
-                ${School.columns.teacher}
-            FROM ${School.table}
+                ${ClassesManager.schema.columns.teacher.name}
+            FROM ${ClassesManager.schema.table}
             INNER JOIN (
-                SELECT MAX(${School.columns.studentsNumber}) AS number
-                FROM ${School.table}
+                SELECT MAX(${ClassesManager.schema.columns.studentsNumber.name}) AS number
+                FROM ${ClassesManager.schema.table}
             ) maxStudents
-            ON ${School.table}.${School.columns.studentsNumber} = maxStudents.number`,
+            ON ${ClassesManager.schema.table}.${ClassesManager.schema.columns.studentsNumber.name} = maxStudents.number`,
             [],
-            ((transaction, result) => { callback(result.rows) })
-        )
+            ((transaction, result) => {
+                callback(result.rows)
+            })
+        );
+    }
+}
+
+class EventsManager {
+    constructor(classesManager) {
+        this.classesManager = classesManager;
+        this.reloadSelect();
+
+        this.handleAddClassButtonClicked = this.handleAddClassButtonClicked.bind(this);
+        this.handleShowClassesButtonClicked = this.handleShowClassesButtonClicked.bind(this);
+        this.handleClearFormButtonClicked = this.handleClearFormButtonClicked.bind(this);
+        this.handleDeleteClassButtonClicked = this.handleDeleteClassButtonClicked.bind(this);
+        this.handleShowMaxTeachersButton = this.handleShowMaxTeachersButton.bind(this);
+    }
+
+    reloadTable() {
+        this.classesManager.all(classes => this.populateTable(classes));
+        this.reloadSelect();
+    }
+
+    reloadSelect() {
+        this.classesManager.selectIds(ids => this.populateSelect(ids));
+    }
+
+    setupButtons() {
+        document.getElementById("addClassButton").onclick = this.handleAddClassButtonClicked;
+        document.getElementById("showClassesButton").onclick = this.handleShowClassesButtonClicked;
+        document.getElementById("clearFormButton").onclick = this.handleClearFormButtonClicked;
+        document.getElementById("deleteClassButton").onclick = this.handleDeleteClassButtonClicked;
+        document.getElementById("showMaxTeachersButton").onclick = this.handleShowMaxTeachersButton;
+    };
+
+    handleAddClassButtonClicked() {
+        this.classesManager.create(
+            document.getElementById("studentsNumberInput").value,
+            document.getElementById("phoneInput").value,
+            document.getElementById("teacherInput").value
+        );
+    }
+
+    handleClearFormButtonClicked() {
+        document.getElementById("studentsNumberInput").value = "";
+        document.getElementById("phoneInput").value = "";
+        document.getElementById("teacherInput").value = "";
+    };
+
+    handleDeleteClassButtonClicked() {
+        this.classesManager.delete(document.getElementById("deletedClassId").value);
+    };
+
+    handleShowClassesButtonClicked() {
+        this.reloadTable();
+    }
+
+    handleShowMaxTeachersButton() {
+        this.classesManager.maxClasses(classes => this.populateMaxClasses(classes));
+    }
+
+    populateTable(classes) {
+        let template = document.getElementById("allClassesTemplate").innerHTML;
+        Mustache.parse(template);
+        document.getElementById("allClasses").innerHTML = Mustache.render(template, { classes: Array.from(classes) });
+    };
+
+    populateSelect(ids) {
+        let template = document.getElementById("deleteClassInputTemplate").innerHTML;
+        Mustache.parse(template);
+        document.getElementById("deleteClassInput").innerHTML = Mustache.render(template, { classIds: Array.from(ids) });
+    };
+
+    populateMaxClasses(classes) {
+        let template = document.getElementById("maxClassesTemplate").innerHTML;
+        Mustache.parse(template);
+        document.getElementById("maxTeachers").innerHTML = Mustache.render(template, { classes: Array.from(classes) });
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    DatabaseConnector.createTable();
-    School.selectIds(ids => populateSelect(ids));
-    setupButtons();
+    let classesManager = new ClassesManager();
+    classesManager.createTable();
+    let eventsManager = new EventsManager(classesManager);
+    eventsManager.setupButtons();
 });
-
-setupButtons = () => {
-    document.getElementById("addClassButton").onclick = handleAddClassButtonClicked;
-    document.getElementById("showClassesButton").onclick = handleShowClassesButtonClicked;
-    document.getElementById("clearFormButton").onclick = handleClearFormButtonClicked;
-    document.getElementById("deleteClassButton").onclick = handleDeleteClassButtonClicked;
-    document.getElementById("showMaxTeachersButton").onclick = handleShowMaxTeachersButton;
-};
-
-handleAddClassButtonClicked = () =>
-    School.create(
-        document.getElementById("studentsNumberInput").value,
-        document.getElementById("phoneInput").value,
-        document.getElementById("teacherInput").value
-    );
-
-handleClearFormButtonClicked = () => {
-    document.getElementById("studentsNumberInput").value = "";
-    document.getElementById("phoneInput").value = "";
-    document.getElementById("teacherInput").value = "";
-};
-
-handleDeleteClassButtonClicked = () => {
-    School.delete(document.getElementById("deletedClassId").value);
-};
-
-handleShowClassesButtonClicked = () => loadTable();
-handleShowMaxTeachersButton = () => School.maxClasses(classes => populateMaxClasses(classes));
-loadTable = () => School.all(classes => populateTable(classes));
-
-populateTable = classes => {
-    let template = document.getElementById("allClassesTemplate").innerHTML;
-    Mustache.parse(template);
-    document.getElementById("allClasses").innerHTML = Mustache.render(template, { classes: Array.from(classes) });
-};
-
-populateSelect = ids => {
-    let template = document.getElementById("deleteClassInputTemplate").innerHTML;
-    Mustache.parse(template);
-    document.getElementById("deleteClassInput").innerHTML = Mustache.render(template, { classIds: Array.from(ids) });
-};
-
-populateMaxClasses = classes => {
-    let template = document.getElementById("maxClassesTemplate").innerHTML;
-    Mustache.parse(template);
-    document.getElementById("maxTeachers").innerHTML = Mustache.render(template, { classes: Array.from(classes) });
-};
