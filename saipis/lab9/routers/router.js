@@ -6,12 +6,12 @@ const parser = require('../helpers/parser');
 const fixer = require('../helpers/fixer');
 
 router.get('/', (req, res) => {
-		res.sendFile(path.resolve('./client/index.html'))		
+    res.sendFile(path.join(__dirname, '..', 'client', 'index.html'))
 });
 
 router.get('/show', (req, res) => {
 	fs.readFile('incorrect.txt', (err, data) => {
-				
+
 		if (err) {
 			console.log(err.message);
 		}
@@ -23,7 +23,7 @@ router.get('/show', (req, res) => {
 
 router.get('/second', (req, res) => {
 	fs.readFile('correct.txt', (err, data) => {
-				
+
 		if (err) {
 			console.log(err.message);
 		}
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
 
 	const correct =  fixer(incorrect);
 	fs.writeFile('correct.txt', correct, () => {});
-	
+
 	res.status(200).end();
 });
 
